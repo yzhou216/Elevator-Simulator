@@ -1,12 +1,13 @@
 package io.yiyuzhou.app;
 
-import io.github.cdimascio.dotenv.Dotenv;
-// import io.github.cdimascio.dotenv.DotenvException;
-
 public class App {
 	public static void main(String[] args) {
-		/* env tests */
-		Dotenv dotenv = Dotenv.load();
-		System.out.println(dotenv.get("NAME"));
+		Env env = new Env();
+		System.out.println(env.getProperty("structures"));
+		System.out.println(env.getProperty("floors"));
+		System.out.println(env.getProperty("passengers"));
+		System.out.println(env.getProperty("elevators"));
+		System.out.println(env.getProperty("elevatorCapacity"));
+		System.out.println(env.getProperty("duration"));
 	}
 }
