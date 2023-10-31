@@ -1,5 +1,6 @@
 package io.yiyuzhou.app;
 
+import java.io.File;
 import java.util.Properties;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -9,7 +10,24 @@ class Env {
 	private Properties env = new Properties();
 
 	public Env() {
-		Dotenv dotenv = Dotenv.load();
+		this(null);
+	}
+
+	/* overloaded constructor accepts file path */
+	public Env(String path) {
+		Dotenv dotenv;
+		if (path != null && !path.isEmpty()) {
+			File file = new File(path);
+			String directoryPath = file.getParent();
+			String filename = file.getName();
+			dotenv = Dotenv.configure().directory(directoryPath).filename(filename).load();
+		} else {
+			dotenv = Dotenv.load();
+		}
+		initializeEnv(dotenv);
+	}
+
+	private void initializeEnv(Dotenv dotenv) {
 		env.setProperty("structures", getEnvWithDefault(dotenv, "structures", "linked"));
 		env.setProperty("floors", getEnvWithDefault(dotenv, "floors", "32"));
 		env.setProperty("passengers", getEnvWithDefault(dotenv, "passengers", "0.03"));
