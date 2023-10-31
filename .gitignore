@@ -18,3 +18,9 @@ buildNumber.properties
 .classpath
 
 .env
+
+# Emacs temp files
+\#*\#
+*~
+.#*
+tramp
