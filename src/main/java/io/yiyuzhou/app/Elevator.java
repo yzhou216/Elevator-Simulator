@@ -2,6 +2,7 @@ package io.yiyuzhou.app;
 
 import java.util.PriorityQueue;
 import java.util.Collections;
+import java.util.Deque;
 
 class Elevator {
 	private final int capacity;
@@ -47,16 +48,15 @@ class Elevator {
 		return true;
 	}
 
-	public boolean load(Person passenger) {
-		if (!(minHeap.size() < capacity) || !(maxHeap.size() < capacity))
-			return false; /* elevator full */
-
-		if (goingUp)
-			this.minHeap.add(passenger);
-		else
-			this.maxHeap.add(passenger);
-
-		return true;
+	/* takes a deque, load as much as posssible on to the elevator then return the rest as a deque */
+	public void load(Deque<Person> passengers) {
+		if (goingUp) {
+			while (minHeap.size() < capacity && !passengers.isEmpty())
+				this.minHeap.add(passengers.poll());
+		} else {
+			while (maxHeap.size() < capacity && !passengers.isEmpty())
+				this.maxHeap.add(passengers.poll());
+		}
 	}
 
 	public int getCurFloor() {
