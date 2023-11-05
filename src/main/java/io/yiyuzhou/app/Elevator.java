@@ -6,20 +6,20 @@ import java.util.Collections;
 class Elevator {
 	private final int capacity;
 	private int curFloor;
-	private boolean up;
+	private boolean goingUp;
 	private final PriorityQueue<Person> minHeap = new PriorityQueue<>(); /* elevator going up */
 	private final PriorityQueue<Person> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); /* elevator going down */
 
 	public Elevator(int capacity) {
 		this.capacity = capacity;
 		this.curFloor= 0;
-		this.up = true;
+		this.goingUp = true;
 	}
 
 	/* returns true if the person is added, false otherwise */
 	public boolean addPerson(Person person) {
 		if (minHeap.size() < capacity && maxHeap.size() < capacity) {
-			if (this.up)
+			if (this.goingUp)
 				minHeap.add(person);
 			else
 				maxHeap.add(person);
@@ -33,7 +33,7 @@ class Elevator {
 	public boolean unload(int floor) {
 		PriorityQueue<Person> passengers;
 
-		if (up)
+		if (goingUp)
 			passengers = minHeap;
 		else
 			passengers = maxHeap;
@@ -51,7 +51,7 @@ class Elevator {
 		if (!(minHeap.size() < capacity) || !(maxHeap.size() < capacity))
 			return false; /* elevator full */
 
-		if (up)
+		if (goingUp)
 			this.minHeap.add(passenger);
 		else
 			this.maxHeap.add(passenger);
@@ -68,11 +68,11 @@ class Elevator {
 	}
 
 	public boolean isUP() {
-		return up;
+		return goingUp;
 	}
 
-	public void setUp(boolean up) {
-		this.up = up;
+	public void setGoingUp(boolean up) {
+		this.goingUp = up;
 	}
 
 	public PriorityQueue<Person> getMinHeap() {
