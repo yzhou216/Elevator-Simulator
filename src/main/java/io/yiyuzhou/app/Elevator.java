@@ -42,7 +42,7 @@ class Elevator {
 		if (passengers.peek() == null)
 			return false;
 			
-		while (passengers.peek().getDest() == floor)
+		while (passengers.peek() != null && passengers.peek().getDest() == floor)
 			passengers.poll();
 
 		return true;
