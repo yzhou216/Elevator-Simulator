@@ -67,7 +67,7 @@ class Elevator {
 		this.curFloor = curFloor;
 	}
 
-	public boolean isUP() {
+	public boolean isGoingUp() {
 		return goingUp;
 	}
 
