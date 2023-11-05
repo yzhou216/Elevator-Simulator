@@ -2,7 +2,7 @@ package io.yiyuzhou.app;
 
 import java.util.Random;
 
-class Person implements Comparable<Person>{
+class Person implements Comparable<Person> {
 	private int start;
 	private int dest;
 	private static final Random random = new Random();
@@ -12,7 +12,7 @@ class Person implements Comparable<Person>{
 		this.start = start;
 
 		do {
-		    this.dest = random.nextInt(maxFloor - 1) + 1;
+			this.dest = random.nextInt(maxFloor - 1) + 1;
 		} while (this.dest == this.start); /* person can't start and go to the same floor */
 	}
 
