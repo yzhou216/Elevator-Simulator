@@ -37,4 +37,12 @@ public class Floor {
 	public int getFloorNum() {
 		return floorNum;
 	}
+
+	public Deque<Person> getPassengersDown() {
+		return passengersDown;
+	}
+
+	public Deque<Person> getPassengersUp() {
+		return passengersUp;
+	}
 }
