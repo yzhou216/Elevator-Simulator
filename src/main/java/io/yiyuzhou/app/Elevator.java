@@ -7,8 +7,8 @@ class Elevator {
 	private final int capacity;
 	private int curFloor;
 	private boolean up;
-	PriorityQueue<Person> minHeap = new PriorityQueue<>(); /* elevator going up */
-	PriorityQueue<Person> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); /* elevator going down */
+	private final PriorityQueue<Person> minHeap = new PriorityQueue<>(); /* elevator going up */
+	private final PriorityQueue<Person> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); /* elevator going down */
 
 	public Elevator(int capacity) {
 		this.capacity = capacity;
@@ -61,5 +61,25 @@ class Elevator {
 
 	public int getCurFloor() {
 		return curFloor;
+	}
+
+	public void setCurFloor(int curFloor) {
+		this.curFloor = curFloor;
+	}
+
+	public boolean isUP() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public PriorityQueue<Person> getMinHeap() {
+		return this.minHeap;
+	}
+
+	public PriorityQueue<Person> getMaxHeap() {
+		return this.maxHeap;
 	}
 }
