@@ -11,8 +11,9 @@ class Person implements Comparable<Person> {
 	public Person(int start, int maxFloor) {
 		this.start = start;
 
+		/* maxFloor is the floor number of the top floor, not the number of floors */
 		do {
-			this.dest = random.nextInt(maxFloor - 1) + 1; /* maxFloor - 1 is the floor number of the top floor */
+			this.dest = random.nextInt(maxFloor + 1); /* between 0 and maxFloor inclusive */
 		} while (this.dest == this.start); /* person can't start and go to the same floor */
 	}
 
