@@ -9,6 +9,22 @@ public class App {
 		}
 
 		for (int i = 0; i < elevators.length; i++) {
+			/* debug */
+			System.out.printf("current floor: %d\n", elevators[i].getCurFloor());
+			if (elevators[i].isGoingUp())
+				System.out.println("going up");
+			else
+				System.out.println("going down");
+			System.out.printf("num of min heap passengers: %d\n", elevators[i].getMinHeap().size());
+			System.out.printf("num of max heap passengers: %d\n", elevators[i].getMaxHeap().size());
+
+			for (int j = 0; j < floors.length; j++) {
+				System.out.printf("floor: %d\n", j);
+				System.out.printf("num going up: %d\n", floors[j].getPassengersUp().size());
+				System.out.printf("num going down: %d\n\n", floors[j].getPassengersDown().size());
+			}
+			/* end debug */
+
 			/* send elevator down or up if it's on the top floor or the bottom floor */
 			if (elevators[i].getCurFloor() == numOfFloors - 1) {
 				if (elevators[i].isGoingUp())
@@ -60,15 +76,6 @@ public class App {
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersUp());
 			else
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersDown());
-
-			/* debug */
-			if (elevators[i].isGoingUp())
-				System.out.println("going up");
-			else
-				System.out.println("going down");
-			System.out.printf("num of min heap passengers: %d\n", elevators[i].getMinHeap().size());
-			System.out.printf("num of max heap passengers: %d\n", elevators[i].getMaxHeap().size());
-			System.out.printf("current floor: %d\n\n", elevators[i].getCurFloor()); /* debug */
 		}
 	}
 
