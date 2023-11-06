@@ -56,11 +56,10 @@ public class App {
 
 			elevators[i].unload(elevators[i].getCurFloor());
 
-			if (elevators[i].isGoingUp()) {
+			if (elevators[i].isGoingUp())
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersUp());
-			} else {
+			else
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersDown());
-			}
 
 			/* debug */
 			if (elevators[i].isGoingUp())
