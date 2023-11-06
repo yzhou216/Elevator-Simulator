@@ -32,8 +32,12 @@ public class App {
 						elevators[i].setCurFloor(numOfFloors - 1);
 					}
 				} else {
-					/* TODO: elevator can move no more than 5 floors each time */
-					elevators[i].setCurFloor(elevators[i].getMinHeap().peek().getDest());
+					/* elevator can move up no more than 5 floors each time */
+					Person root = elevators[i].getMinHeap().peek();
+					if (root.getDest() - elevators[i].getCurFloor() > 5)
+						elevators[i].setCurFloor(elevators[i].getCurFloor() + 5);
+					else
+						elevators[i].setCurFloor(root.getDest());
 				}
 
 			} else if (!elevators[i].isGoingUp()) {
@@ -44,7 +48,12 @@ public class App {
 						elevators[i].setCurFloor(0);
 					}
 				} else {
-					elevators[i].setCurFloor(elevators[i].getMaxHeap().peek().getDest());
+					/* elevator can move down no more than 5 floors each time */
+					Person root = elevators[i].getMaxHeap().peek();
+					if (elevators[i].getCurFloor() - root.getDest() > 5)
+						elevators[i].setCurFloor(elevators[i].getCurFloor() - 5);
+					else
+						elevators[i].setCurFloor(root.getDest());
 				}
 			}
 
