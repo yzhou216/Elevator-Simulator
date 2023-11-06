@@ -54,6 +54,14 @@ public class App {
 				}
 			}
 
+			elevators[i].unload(elevators[i].getCurFloor());
+
+			if (elevators[i].isGoingUp()) {
+				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersUp());
+			} else {
+				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersDown());
+			}
+
 			/* debug */
 			if (elevators[i].isGoingUp())
 				System.out.println("going up");
@@ -62,14 +70,6 @@ public class App {
 			System.out.printf("num of min heap passengers: %d\n", elevators[i].getMinHeap().size());
 			System.out.printf("num of max heap passengers: %d\n", elevators[i].getMaxHeap().size());
 			System.out.printf("current floor: %d\n\n", elevators[i].getCurFloor()); /* debug */
-
-			elevators[i].unload(elevators[i].getCurFloor());
-
-			if (elevators[i].isGoingUp()) {
-				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersUp());
-			} else {
-				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersDown());
-			}
 		}
 	}
 
