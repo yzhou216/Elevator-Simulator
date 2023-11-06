@@ -73,7 +73,12 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		Env env = new Env(args[0]);
+		Env env;
+		if (args.length == 0)
+			env = new Env();
+		else
+			env = new Env(args[0]);
+
 		final String structure = env.getProperty("structures");
 		final int numOfFloors = Integer.parseInt(env.getProperty("floors"));
 		final float passengersProbability = Float.parseFloat(env.getProperty("passengers"));
