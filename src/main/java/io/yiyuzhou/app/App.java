@@ -25,19 +25,6 @@ public class App {
 			}
 			/* end debug */
 
-			/* send elevator down or up if it's on the top floor or the bottom floor */
-			if (elevators[i].getCurFloor() == numOfFloors - 1) {
-				if (elevators[i].isGoingUp())
-					elevators[i].setGoingUp(false);
-				else
-					elevators[i].setGoingUp(true);
-			} else if (elevators[i].getCurFloor() == 0) {
-				if (!elevators[i].isGoingUp())
-					elevators[i].setGoingUp(true);
-				else
-					elevators[i].setGoingUp(true);
-			}
-
 			if (elevators[i].isGoingUp()) {
 				/* case when the elevator is empty */
 				if (elevators[i].getMinHeap().isEmpty()) {
@@ -76,6 +63,12 @@ public class App {
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersUp());
 			else
 				elevators[i].load(floors[elevators[i].getCurFloor()].getPassengersDown());
+
+			/* send elevator down or up if it's on the top floor or the bottom floor */
+			if (elevators[i].getCurFloor() == numOfFloors - 1)
+				elevators[i].setGoingUp(false);
+			else if (elevators[i].getCurFloor() == 0)
+				elevators[i].setGoingUp(true);
 		}
 	}
 
