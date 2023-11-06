@@ -13,7 +13,7 @@ class Elevator {
 
 	public Elevator(int capacity) {
 		this.capacity = capacity;
-		this.curFloor= 0;
+		this.curFloor = 0;
 		this.goingUp = true;
 	}
 
