@@ -24,13 +24,11 @@ public class App {
 
 			if (elevators[i].isGoingUp()) {
 				/* case when the elevator is empty */
-				//Person root = elevators[i].getMinHeap().peek();
 				if (elevators[i].getMinHeap().isEmpty()) {
-					if (elevators[i].getCurFloor() + 5 <= numOfFloors - 1) {
+					if (elevators[i].getCurFloor() + 5 <= numOfFloors - 1)
 						elevators[i].setCurFloor(elevators[i].getCurFloor() + 5);
-					} else {
+					else
 						elevators[i].setCurFloor(numOfFloors - 1);
-					}
 				} else {
 					/* elevator can move up no more than 5 floors each time */
 					Person root = elevators[i].getMinHeap().peek();
@@ -42,11 +40,10 @@ public class App {
 
 			} else if (!elevators[i].isGoingUp()) {
 				if (elevators[i].getMaxHeap().isEmpty()) {
-					if (elevators[i].getCurFloor() - 5 >= 0) {
+					if (elevators[i].getCurFloor() - 5 >= 0)
 						elevators[i].setCurFloor(elevators[i].getCurFloor() - 5);
-					} else {
+					else
 						elevators[i].setCurFloor(0);
-					}
 				} else {
 					/* elevator can move down no more than 5 floors each time */
 					Person root = elevators[i].getMaxHeap().peek();
