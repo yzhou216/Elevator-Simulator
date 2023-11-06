@@ -86,6 +86,15 @@ public class App {
 		final int elevatorCapacity = Integer.parseInt(env.getProperty("elevatorCapacity"));
 		final int duration = Integer.parseInt(env.getProperty("duration"));
 
+		/* debug */
+		System.out.printf("structures: %s\n", structure);
+		System.out.printf("floors: %d\n", numOfFloors);
+		System.out.printf("passengers: %f\n", passengersProbability);
+		System.out.printf("elevators: %d\n", numOfElevators);
+		System.out.printf("elevatorCapacity: %d\n", elevatorCapacity);
+		System.out.printf("duration: %d\n\n", duration);
+		/* end debug */
+
 		Elevator[] elevators = new Elevator[numOfElevators];
 		for (int i = 0; i < numOfElevators; i++)
 			elevators[i] = new Elevator(elevatorCapacity);
