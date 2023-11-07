@@ -1,7 +1,7 @@
 package io.yiyuzhou.app;
 
 public class App {
-	private static void tick(Elevator[] elevators, Floor[] floors, int numOfFloors, float passengersProbablity) {
+	private static void tick(Elevator[] elevators, Floor[] floors, int numOfFloors, float passengersProbablity, boolean verbose) {
 		/* random generate passengers on different floors */
 		for (int i = 0; i < floors.length; i++) {
 			if (Math.random() < passengersProbablity)
@@ -18,21 +18,23 @@ public class App {
 			 */
 			elevators[i].incrementTickCount(); /* tick count for persons in the elevators */
 
-			/* debug */
-			System.out.printf("current floor: %d\n", elevators[i].getCurFloor());
-			if (elevators[i].isGoingUp())
-				System.out.println("going up");
-			else
-				System.out.println("going down");
-			System.out.printf("num of min heap passengers: %d\n", elevators[i].getMinHeap().size());
-			System.out.printf("num of max heap passengers: %d\n", elevators[i].getMaxHeap().size());
+			if (verbose) {
+				/* debug */
+				System.out.printf("current floor: %d\n", elevators[i].getCurFloor());
+				if (elevators[i].isGoingUp())
+					System.out.println("going up");
+				else
+					System.out.println("going down");
+				System.out.printf("num of min heap passengers: %d\n", elevators[i].getMinHeap().size());
+				System.out.printf("num of max heap passengers: %d\n", elevators[i].getMaxHeap().size());
 
-			for (int j = 0; j < floors.length; j++) {
-				System.out.printf("floor: %d\n", j);
-				System.out.printf("num going up: %d\n", floors[j].getPassengersUp().size());
-				System.out.printf("num going down: %d\n\n", floors[j].getPassengersDown().size());
+				for (int j = 0; j < floors.length; j++) {
+					System.out.printf("floor: %d\n", j);
+					System.out.printf("num going up: %d\n", floors[j].getPassengersUp().size());
+					System.out.printf("num going down: %d\n\n", floors[j].getPassengersDown().size());
+				}
+				/* end debug */
 			}
-			/* end debug */
 
 			if (elevators[i].isGoingUp()) {
 				/* case when the elevator is empty */
@@ -82,11 +84,20 @@ public class App {
 	}
 
 	public static void main(String[] args) {
+		String filePath = null;
+		boolean verbose = false;
+		for (String arg : args) {
+			if ("-v".equals(arg) || "--verbose".equals(arg))
+				verbose = true;
+			else if (!arg.startsWith("-"))
+				filePath = arg;
+		}
+
 		Env env;
-		if (args.length == 0)
+		if (filePath == null)
 			env = new Env();
 		else
-			env = new Env(args[0]);
+			env = new Env(filePath);
 
 		final String structure = env.getProperty("structures");
 		final int numOfFloors = Integer.parseInt(env.getProperty("floors"));
@@ -95,14 +106,16 @@ public class App {
 		final int elevatorCapacity = Integer.parseInt(env.getProperty("elevatorCapacity"));
 		final int duration = Integer.parseInt(env.getProperty("duration"));
 
-		/* debug */
-		System.out.printf("structures: %s\n", structure);
-		System.out.printf("floors: %d\n", numOfFloors);
-		System.out.printf("passengers: %f\n", passengersProbability);
-		System.out.printf("elevators: %d\n", numOfElevators);
-		System.out.printf("elevatorCapacity: %d\n", elevatorCapacity);
-		System.out.printf("duration: %d\n\n", duration);
-		/* end debug */
+		if (verbose) {
+			/* debug */
+			System.out.printf("structures: %s\n", structure);
+			System.out.printf("floors: %d\n", numOfFloors);
+			System.out.printf("passengers: %f\n", passengersProbability);
+			System.out.printf("elevators: %d\n", numOfElevators);
+			System.out.printf("elevatorCapacity: %d\n", elevatorCapacity);
+			System.out.printf("duration: %d\n\n", duration);
+			/* end debug */
+		}
 
 		Elevator[] elevators = new Elevator[numOfElevators];
 		for (int i = 0; i < numOfElevators; i++)
@@ -113,7 +126,7 @@ public class App {
 			floors[i] = new Floor(i, structure);
 
 		for (int i = 0; i < duration; i++) {
-			tick(elevators, floors, numOfFloors, passengersProbability);
+			tick(elevators, floors, numOfFloors, passengersProbability, verbose);
 		}
 
 		System.out.printf("Total persons arrived: %d\n", Person.totalArrived);
