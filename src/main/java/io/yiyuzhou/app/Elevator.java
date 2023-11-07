@@ -3,6 +3,7 @@ package io.yiyuzhou.app;
 import java.util.PriorityQueue;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.Iterator;
 
 class Elevator {
 	private final int capacity;
@@ -42,8 +43,15 @@ class Elevator {
 		if (passengers.peek() == null)
 			return false;
 			
-		while (passengers.peek() != null && passengers.peek().getDest() == floor)
-			passengers.poll();
+		while (passengers.peek() != null && passengers.peek().getDest() == floor) {
+			Person person = passengers.poll();
+			int ticksTraveled = person.getTicksTraveled();
+			if (ticksTraveled > Person.maxTicks)
+				Person.maxTicks = ticksTraveled;
+
+			Person.totalTicks += ticksTraveled;
+			Person.totalArrived++;
+		}
 
 		return true;
 	}
@@ -81,5 +89,18 @@ class Elevator {
 
 	public PriorityQueue<Person> getMaxHeap() {
 		return this.maxHeap;
+	}
+
+	public void incrementTickCount() {
+		Iterator<Person> iterator;
+		if (goingUp)
+			iterator = minHeap.iterator();
+		else
+			iterator = maxHeap.iterator();
+
+		while (iterator.hasNext()) {
+			Person person = iterator.next();
+			person.setTicksTraveled(person.getTicksTraveled() + 1);
+		}
 	}
 }

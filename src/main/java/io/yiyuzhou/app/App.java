@@ -6,9 +6,18 @@ public class App {
 		for (int i = 0; i < floors.length; i++) {
 			if (Math.random() < passengersProbablity)
 				floors[i].addPerson(new Person(floors[i].floorNum, numOfFloors - 1));
+
+			floors[i].incrementTickCount(); /* tick count for persons on the floors waiting */
 		}
 
 		for (int i = 0; i < elevators.length; i++) {
+			/**
+			 * increment tick count in the beginning of the loop to avoid double count
+			 * with Floor.incrementTickCount(), since the passengers can be counted once
+			 * on the floor, and one more time on the elevator.
+			 */
+			elevators[i].incrementTickCount(); /* tick count for persons in the elevators */
+
 			/* debug */
 			System.out.printf("current floor: %d\n", elevators[i].getCurFloor());
 			if (elevators[i].isGoingUp())
@@ -106,5 +115,10 @@ public class App {
 		for (int i = 0; i < duration; i++) {
 			tick(elevators, floors, numOfFloors, passengersProbability);
 		}
+
+		System.out.printf("Total persons arrived: %d\n", Person.totalArrived);
+		System.out.printf("Total ticks traveled: %d\n", Person.totalTicks);
+		System.out.printf("Maxmium ticks traveled by one person: %d\n", Person.maxTicks);
+		System.out.printf("Average ticks traveled per person: %f\n", ((double)Person.totalTicks / Person.totalArrived));
 	}
 }

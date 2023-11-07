@@ -7,6 +7,11 @@ class Person implements Comparable<Person> {
 	private int dest;
 	private static final Random random = new Random();
 
+	private int ticksTraveled = 0;
+	public static int totalArrived = 0;
+	public static int totalTicks = 0;
+	public static int maxTicks = Integer.MIN_VALUE;
+
 	/* creates a Person object has the dest of a random floor */
 	public Person(int start, int maxFloor) {
 		this.start = start;
@@ -27,5 +32,13 @@ class Person implements Comparable<Person> {
 
 	public int getDest() {
 		return this.dest;
+	}
+
+	public void setTicksTraveled(int ticksTraveled) {
+		this.ticksTraveled = ticksTraveled;
+	}
+
+	public int getTicksTraveled() {
+		return this.ticksTraveled;
 	}
 }
