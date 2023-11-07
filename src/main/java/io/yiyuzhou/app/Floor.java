@@ -3,6 +3,7 @@ package io.yiyuzhou.app;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.ArrayDeque;
+import java.util.Iterator;
 
 public class Floor {
 	final public int floorNum;
@@ -44,5 +45,22 @@ public class Floor {
 
 	public Deque<Person> getPassengersUp() {
 		return passengersUp;
+	}
+
+	public void incrementTickCount() {
+		Iterator<Person> upIterator;
+		Iterator<Person> downIterator;
+		upIterator = passengersUp.iterator();
+		downIterator = passengersDown.iterator();
+
+		while (upIterator.hasNext()) {
+			Person person = upIterator.next();
+			person.setTicksTraveled(person.getTicksTraveled() + 1);
+		}
+
+		while (downIterator.hasNext()) {
+			Person person = downIterator.next();
+			person.setTicksTraveled(person.getTicksTraveled() + 1);
+		}
 	}
 }
