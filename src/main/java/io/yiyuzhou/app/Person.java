@@ -7,8 +7,16 @@ class Person implements Comparable<Person> {
 	private int dest;
 	private static final Random random = new Random();
 
+	private long startTime;
+	public static int totalArrived = 0;
+	public static int totalTime = 0;
+	public static long maxTime = Long.MIN_VALUE;
+
 	/* creates a Person object has the dest of a random floor */
 	public Person(int start, int maxFloor) {
+		/* time recording */
+		this.startTime = System.currentTimeMillis();
+
 		this.start = start;
 
 		/* maxFloor is the floor number of the top floor, not the number of floors */
@@ -27,5 +35,9 @@ class Person implements Comparable<Person> {
 
 	public int getDest() {
 		return this.dest;
+	}
+
+	public long getStartTime() {
+		return this.startTime;
 	}
 }

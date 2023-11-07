@@ -106,5 +106,12 @@ public class App {
 		for (int i = 0; i < duration; i++) {
 			tick(elevators, floors, numOfFloors, passengersProbability);
 		}
+
+		/* debug */
+		System.out.printf("Total arrived: %d persons\n", Person.totalArrived);
+		System.out.printf("Total travel time: %d ms\n", Person.totalTime);
+		System.out.printf("Average travel time: %f ms\n", ((double)Person.totalTime / Person.totalArrived));
+		System.out.printf("Maximum travel time: %d ms\n", Person.maxTime);
+		/* end debug */
 	}
 }

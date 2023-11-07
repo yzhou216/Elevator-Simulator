@@ -42,8 +42,16 @@ class Elevator {
 		if (passengers.peek() == null)
 			return false;
 			
-		while (passengers.peek() != null && passengers.peek().getDest() == floor)
-			passengers.poll();
+		long stopTime = System.currentTimeMillis();
+		while (passengers.peek() != null && passengers.peek().getDest() == floor) {
+			Person person = passengers.poll();
+			long timeSpan = stopTime - person.getStartTime();
+			if (timeSpan > Person.maxTime)
+				Person.maxTime = timeSpan;
+
+			Person.totalTime += timeSpan;
+			Person.totalArrived++;
+		}
 
 		return true;
 	}
