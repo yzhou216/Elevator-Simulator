@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Properties;
 
 import io.github.cdimascio.dotenv.Dotenv;
-// import io.github.cdimascio.dotenv.DotenvException;
 
 class Env {
 	private Properties env = new Properties();

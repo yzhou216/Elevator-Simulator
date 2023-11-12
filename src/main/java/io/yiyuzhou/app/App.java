@@ -125,9 +125,8 @@ public class App {
 		for (int i = 0; i < numOfFloors; i++)
 			floors[i] = new Floor(i, structure);
 
-		for (int i = 0; i < duration; i++) {
+		for (int i = 0; i < duration; i++)
 			tick(elevators, floors, numOfFloors, passengersProbability, verbose);
-		}
 
 		System.out.printf("Total persons arrived: %d\n", Person.totalArrived);
 		System.out.printf("Total ticks traveled: %d\n", Person.totalTicks);

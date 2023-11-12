@@ -27,9 +27,9 @@ class Elevator {
 				maxHeap.add(person);
 
 			return true;
-		} else {
-			return false; /* elevator full */
 		}
+
+		return false; /* elevator full */
 	}
 
 	public boolean unload(int floor) {
@@ -58,13 +58,12 @@ class Elevator {
 
 	/* takes a deque, load as much as posssible on to the elevator then return the rest as a deque */
 	public void load(Deque<Person> passengers) {
-		if (goingUp) {
+		if (goingUp)
 			while (minHeap.size() < capacity && !passengers.isEmpty())
 				this.minHeap.add(passengers.poll());
-		} else {
+		else
 			while (maxHeap.size() < capacity && !passengers.isEmpty())
 				this.maxHeap.add(passengers.poll());
-		}
 	}
 
 	public int getCurFloor() {
@@ -79,8 +78,8 @@ class Elevator {
 		return goingUp;
 	}
 
-	public void setGoingUp(boolean up) {
-		this.goingUp = up;
+	public void setGoingUp(boolean goingUp) {
+		this.goingUp = goingUp;
 	}
 
 	public PriorityQueue<Person> getMinHeap() {
