@@ -10,6 +10,14 @@ public class Floor {
 	private Deque<Person> passengersUp;
 	private Deque<Person> passengersDown;
 
+	/**
+	 * Constructs a Floor instance with a specified floor number and structure type.
+	 * Initializes the queues for passengers going up and down based on the specified structure.
+	 *
+	 * @param floorNum The floor number of this floor.
+	 * @param structure The type of data structure to use for storing passengers.
+	 *                  "linked" for LinkedList, any other value for ArrayDeque.
+	 */
 	public Floor(final int floorNum, String structure) {
 		this.floorNum = floorNum;
 		if (structure == "linked") {
@@ -21,6 +29,13 @@ public class Floor {
 		}
 	}
 
+	/**
+	 * Adds a person to the appropriate queue based on their destination relative to the current floor.
+	 * If the person's destination is above their start, they are added to the passengers going up;
+	 * otherwise, they are added to the passengers going down.
+	 *
+	 * @param person The Person object to be added to the queue.
+	 */
 	public void addPerson(Person person) {
 		if (person.getStart() > person.getDest())
 			passengersDown.add(person);
@@ -47,6 +62,11 @@ public class Floor {
 		return passengersUp;
 	}
 
+	/**
+	 * Increments the tick count for each person waiting on this floor.
+	 * This method should be called in each tick of the simulation to update the waiting time
+	 * of each person in the queues.
+	 */
 	public void incrementTickCount() {
 		Iterator<Person> upIterator;
 		Iterator<Person> downIterator;

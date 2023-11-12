@@ -12,13 +12,25 @@ class Elevator {
 	private final PriorityQueue<Person> minHeap = new PriorityQueue<>(); /* elevator going up */
 	private final PriorityQueue<Person> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); /* elevator going down */
 
+	/**
+	 * Constructs an Elevator instance with a specified capacity.
+	 * Initializes the elevator at the ground floor and sets its initial direction to going up.
+	 *
+	 * @param capacity The maximum number of passengers the elevator can hold.
+	 */
 	public Elevator(int capacity) {
 		this.capacity = capacity;
 		this.curFloor = 0;
 		this.goingUp = true;
 	}
 
-	/* returns true if the person is added, false otherwise */
+	/**
+	 * Adds a person to the appropriate queue based on the current direction of the elevator.
+	 * Only adds the person if there is capacity in the elevator.
+	 *
+	 * @param person The Person object to be added.
+	 * @return true if the person is successfully added, false if the elevator is full.
+	 */
 	public boolean addPerson(Person person) {
 		if (minHeap.size() < capacity && maxHeap.size() < capacity) {
 			if (this.goingUp)
@@ -32,6 +44,13 @@ class Elevator {
 		return false; /* elevator full */
 	}
 
+	/**
+	 * Unloads passengers whose destination is the current floor.
+	 * Updates statistics for each person unloaded, such as total ticks traveled and max ticks.
+	 *
+	 * @param floor The current floor of the elevator.
+	 * @return true if any passengers were unloaded, false if the queue is empty.
+	 */
 	public boolean unload(int floor) {
 		PriorityQueue<Person> passengers;
 
@@ -56,7 +75,13 @@ class Elevator {
 		return true;
 	}
 
-	/* takes a deque, load as much as posssible on to the elevator then return the rest as a deque */
+	/**
+	 * Loads passengers onto the elevator from a queue of waiting passengers.
+	 * The method continues loading until either the elevator reaches its capacity
+	 * or there are no more passengers waiting.
+	 *
+	 * @param passengers A Deque of Person objects representing passengers waiting to board.
+	 */
 	public void load(Deque<Person> passengers) {
 		if (goingUp)
 			while (minHeap.size() < capacity && !passengers.isEmpty())
@@ -90,6 +115,11 @@ class Elevator {
 		return this.maxHeap;
 	}
 
+	/**
+	 * Increments the tick count for each person inside the elevator.
+	 * This method should be called in each tick of the simulation to update the travel time
+	 * of each person in the elevator.
+	 */
 	public void incrementTickCount() {
 		Iterator<Person> iterator;
 		if (goingUp)

@@ -1,6 +1,22 @@
 package io.yiyuzhou.app;
 
 public class App {
+	/**
+	 * Simulates a single tick of the elevator system.
+	 *
+	 * In each tick, this method performs several actions:
+	 * - Randomly generates passengers on different floors based on a probability.
+	 * - Increments the tick count for passengers waiting on the floors and in the elevators.
+	 * - Moves elevators up or down based on their current state and passenger destinations.
+	 * - Loads and unloads passengers at the current floor of each elevator.
+	 * - Changes the direction of an elevator if it reaches the top or bottom floor.
+	 *
+	 * @param elevators An array of Elevator objects representing the elevators in the system.
+	 * @param floors An array of Floor objects representing the floors in the building.
+	 * @param numOfFloors The total number of floors in the building.
+	 * @param passengersProbablity The probability of a new passenger appearing on a floor.
+	 * @param verbose If true, additional debugging information will be printed to the console.
+	 */
 	private static void tick(Elevator[] elevators, Floor[] floors, int numOfFloors, float passengersProbablity, boolean verbose) {
 		/* random generate passengers on different floors */
 		for (int i = 0; i < floors.length; i++) {

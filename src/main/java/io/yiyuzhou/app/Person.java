@@ -12,7 +12,13 @@ class Person implements Comparable<Person> {
 	public static int totalTicks = 0;
 	public static int maxTicks = Integer.MIN_VALUE;
 
-	/* creates a Person object has the dest of a random floor */
+	/**
+	 * Constructs a Person object with a specified start floor and a random destination floor.
+	 * The destination floor is chosen randomly from all available floors but will not be the same as the start floor.
+	 *
+	 * @param start The start floor of the person.
+	 * @param maxFloor The highest floor number in the building (top floor).
+	 */
 	public Person(int start, int maxFloor) {
 		this.start = start;
 

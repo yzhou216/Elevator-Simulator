@@ -12,7 +12,12 @@ class Env {
 		initializeEnv(null);
 	}
 
-	/* overloaded constructor accepts file path */
+	/**
+	 * Overloaded constructor which accepts a file path to load environment variables.
+	 * It uses the Dotenv library to read configuration from the specified file.
+	 *
+	 * @param path The file path to the configuration file.
+	 */
 	public Env(String path) {
 		Dotenv dotenv;
 		File file = new File(path);
@@ -22,6 +27,12 @@ class Env {
 		initializeEnv(dotenv);
 	}
 
+	/**
+	 * Initializes environment properties. If a Dotenv object is provided, it loads
+	 * properties from the given configuration; otherwise, it sets default values.
+	 *
+	 * @param dotenv An instance of Dotenv used to load environment variables from a file.
+	 */
 	private void initializeEnv(Dotenv dotenv) {
 		if (dotenv != null) {
 			env.setProperty("structures", getEnvWithDefault(dotenv, "structures", "linked"));
@@ -40,6 +51,15 @@ class Env {
 		}
 	}
 
+	/**
+	 * Retrieves an environment variable's value using a given key. If the key is not found,
+	 * a default value is returned. This method supports the scenario where dotenv is not provided.
+	 *
+	 * @param dotenv The Dotenv instance used to retrieve environment variables.
+	 * @param key The key for the environment variable.
+	 * @param defaultValue The default value to return if the key is not found.
+	 * @return The value of the environment variable or the default value if the key is not present.
+	 */
 	private String getEnvWithDefault(Dotenv dotenv, String key, String defaultValue) {
 		if (dotenv == null)
 			return defaultValue;
